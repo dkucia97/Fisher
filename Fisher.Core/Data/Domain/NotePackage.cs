@@ -10,6 +10,7 @@ namespace Fisher.Core.Domain
         public string Description { get; set; }=String.Empty;
         public long FollowersAmount { get; set; }
         public Category Category { get; set; }
+        public User Owner { get; set; }
         public ICollection<Note> Notes { get; set; }
 
         public NotePackage()
