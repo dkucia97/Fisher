@@ -11,7 +11,7 @@ namespace Fisher.Core.Domain
         public long FollowersAmount { get; set; }
         public Category Category { get; set; }
         public User Owner { get; set; }
-        public ICollection<Note> Notes { get; set; }
+        public virtual ICollection<Note> Notes { get; set; }
 
         public NotePackage()
         {
