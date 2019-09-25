@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Fisher.Infrastructure.Repositories
 {
-    public class UserRepository:IUserRepository
+    public class UserRepository : IUserRepository
     {
         private FisherDbContext _context;
 
@@ -15,30 +15,16 @@ namespace Fisher.Infrastructure.Repositories
         {
             _context = context;
         }
-        
-        public async Task Add(User user)
-        {
-            throw new System.NotImplementedException();
-        }
 
-        public async Task Update(User user)
-        {
-            throw new System.NotImplementedException();
-        }
+        public Task Add(User user) => _context.Users.AddAsync(user);
 
-        public async Task<bool> IsUserExist(string userName)
-        {
-           return await _context.Users.AnyAsync(u => u.UserName.Equals(userName));
-        }
 
-        public async Task<User> GetById(int id)
-        {
-            throw new System.NotImplementedException();
-        }
+        public async Task<bool> IsUserExist(string userName) =>
+            await _context.Users.AnyAsync(u => u.UserName.Equals(userName));
 
-        public async Task<User> GetByName(string name)
-        {
-            throw new System.NotImplementedException();
-        }
+        public async Task<User> GetById(int id) => await _context.Users.SingleOrDefaultAsync(u => u.Id == id);
+
+        public async Task<User> GetByName(string name) =>
+            await _context.Users.FirstOrDefaultAsync(u => u.UserName.Equals(name));
     }
 }

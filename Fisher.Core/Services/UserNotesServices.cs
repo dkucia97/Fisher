@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Tasks;
 using Fisher.Core.Data.Repositories;
 using Fisher.Core.Domain;
@@ -14,12 +15,31 @@ namespace Fisher.Core.Services
         {
             _uow = uow;
         }
+        public async Task AddNotePackage(string userName, NotePackage package)
+        {
+           var user= await  _uow.UserRepository.GetByName(userName);
+           if (user == null)
+           {
+               throw new ArgumentException($"User with name {userName} don't exist '");
+           }
+
+           package.Owner = user;
+           await _uow.NotePackageRepository.Add(package);
+           await _uow.Commit();
+        }
         
         public async Task<IEnumerable<NotePackage>> GetUserNotes(string userName)
         {
             return await _uow.NotePackageRepository.GetByUser(userName);
         }
 
+
+        public async Task<IEnumerable<FavoriteNotePackage>>GetUserFavoritePackages(string userName)
+        {
+            var user = await _uow.UserRepository.GetByName(userName);
+            return user.FavoriteNotePackages;
+        }
+        
         public async Task PublishUserNotePackage(string userName,int packageId)
         {
             var package = await _uow.NotePackageRepository.GetById(packageId);
@@ -36,9 +56,5 @@ namespace Fisher.Core.Services
             await _uow.Commit();
         }
 
-        public async Task ImportNotePackageFromFile()
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

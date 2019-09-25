@@ -1,8 +1,12 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
+using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Tasks;
 using Fisher.Core.Data.Repositories;
 using Fisher.Core.Domain;
+using Fisher.Core.Utilities;
 
 namespace Fisher.Core.Services
 {
@@ -14,7 +18,17 @@ namespace Fisher.Core.Services
         {
             _uow = uow;
         }
-        
+
+        public Task<IEnumerable<NotePackage>> GetByCategory(int categoryId, PaginationRequest page)
+        {
+            return _uow.NotePackageRepository.GetByCategory(categoryId, page);
+        }
+
+        public Task<IEnumerable<NotePackage>> GetAllPublicByFollowersAmount(PaginationRequest page)
+        {
+            return _uow.NotePackageRepository.GetAllPublicByFollowersAmount(page);
+        }
+
         public async Task FollowNotePackage(string userName, int packageId)
         {
             var user = await _uow.UserRepository.GetByName(userName);
@@ -23,7 +37,11 @@ namespace Fisher.Core.Services
             {
                 throw  new ArgumentException($"Package with {packageId} id doesn't exist");
             }
-            // Should implement unit of work pattern , this method modify two entities ant they must be in one transaction (atomic operation)
+
+            if (!package.IsPublic)
+            {
+                throw new ArgumentException($"Package with {packageId} id is not public.You can't follow'");
+            }
             package.FollowersAmount++;
             user.FavoriteNotePackages.Add(new FavoriteNotePackage()
             {
@@ -32,6 +50,17 @@ namespace Fisher.Core.Services
                 Title = package.Title
             });
             await _uow.Commit();
+        }
+
+        public async Task UnFollowNotePackage(string userName, int packageId)
+        {
+            var user = await _uow.UserRepository.GetByName(userName);
+            var favoritePackage=user.FavoriteNotePackages.SingleOrDefault(f => f.NotePackageId==packageId);
+            if(favoritePackage!=null)
+            {
+                user.FavoriteNotePackages.Remove(favoritePackage);
+                await _uow.Commit();
+            }
         }
     }
 }
