@@ -24,6 +24,11 @@ namespace Fisher.Infrastructure.Repositories
             return _context.NotePackages.AddAsync(package);
         }
 
+        public Task<bool> IsCategoryExist(int categoryId)
+        {
+            return _context.Categories.AnyAsync(c=>c.Id==categoryId);
+        }
+
 
         public Task<NotePackage> GetById(int id)
         {
@@ -36,7 +41,7 @@ namespace Fisher.Infrastructure.Repositories
         }
 
         public async Task<IEnumerable<NotePackage>> GetByCategory(int categoryId, PaginationRequest page) =>
-            await _context.NotePackages.Where(n => n.Category.Id == categoryId).GetPage(page).ToListAsync();
+            await _context.NotePackages.Where(n => n.Category.Id == categoryId&&n.IsPublic).GetPage(page).ToListAsync();
 
 
         public async Task<IEnumerable<NotePackage>>

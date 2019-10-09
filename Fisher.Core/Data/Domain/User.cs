@@ -9,8 +9,8 @@ namespace Fisher.Core.Domain
         public string Email { get; set; }
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
-        public ICollection<NotePackage> NotePackages { get; set; }
-        public ICollection<FavoriteNotePackage> FavoriteNotePackages { get; set; }
+        public virtual ICollection<NotePackage> NotePackages { get; set; }
+        public virtual ICollection<FavoriteNotePackage> FavoriteNotePackages { get; set; }
 
         public User()
         {

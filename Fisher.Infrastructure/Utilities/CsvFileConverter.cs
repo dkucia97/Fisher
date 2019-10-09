@@ -18,6 +18,7 @@ namespace Fisher.Infrastructure.Utilities
                 using (var csvReader=new CsvReader(reader))
                 {
                   var notes=csvReader.GetRecords<Note>();
+                  stream.Dispose();
                   return notes.ToList();
                 }
             }

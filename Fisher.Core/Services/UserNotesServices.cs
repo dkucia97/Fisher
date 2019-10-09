@@ -18,9 +18,15 @@ namespace Fisher.Core.Services
         public async Task AddNotePackage(string userName, NotePackage package)
         {
            var user= await  _uow.UserRepository.GetByName(userName);
-           if (user == null)
+           if (user is null)
            {
                throw new ArgumentException($"User with name {userName} don't exist '");
+           }
+
+           var categoryId = package.Category.Id;
+           if (! await _uow.NotePackageRepository.IsCategoryExist(categoryId) )
+           {
+               throw new ArgumentException($"Category with {categoryId} don't exist'");
            }
 
            package.Owner = user;

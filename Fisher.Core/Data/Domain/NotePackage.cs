@@ -7,10 +7,11 @@ namespace Fisher.Core.Domain
     {
         public string Title { get; set; }
         public bool IsPublic { get; set; } = false;
-        public string Description { get; set; }=String.Empty;
         public long FollowersAmount { get; set; }
-        public Category Category { get; set; }
-        public User Owner { get; set; }
+        
+        //public Language Language { get; set; }
+        public virtual Category Category { get; set; }
+        public virtual User Owner { get; set; }
         public virtual ICollection<Note> Notes { get; set; }
 
         public NotePackage()

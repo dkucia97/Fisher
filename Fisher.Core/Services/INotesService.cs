@@ -9,6 +9,7 @@ namespace Fisher.Core.Services
 {
     public interface INotesService
     {
+        Task<NotePackage> GetById(string userName,int id);
         Task<IEnumerable<NotePackage>> GetByCategory(int categoryId, PaginationRequest page);
         Task<IEnumerable<NotePackage>> GetAllPublicByFollowersAmount(PaginationRequest page);
         Task FollowNotePackage(string userName, int packageId);

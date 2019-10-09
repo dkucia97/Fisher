@@ -1,3 +1,4 @@
+using System;
 using Fisher.Core.Data.Dtos;
 using Fisher.Core.Domain;
 using Fisher.Core.Utilities;
@@ -15,7 +16,7 @@ namespace Fisher.Infrastructure.Utilities
         
         public PdfNotesDto Generate(NotePackage notePackage, int limitOfNotes = 30)
         {
-            
+            throw  new NotImplementedException();
         }
     }
 }

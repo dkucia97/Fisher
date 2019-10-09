@@ -8,6 +8,7 @@ namespace Fisher.Core.Data.Repositories
     public interface INotePackageRepository
     {
         Task Add(NotePackage package);
+        Task<bool> IsCategoryExist(int categoryId);
         Task<NotePackage> GetById(int id);
         Task<IEnumerable<NotePackage>> GetByUser(string userName);
         Task<IEnumerable<NotePackage>> GetByCategory(int categoryId,PaginationRequest paginationRequest);

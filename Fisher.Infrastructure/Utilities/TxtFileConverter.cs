@@ -4,7 +4,7 @@ using System.IO;
 using Fisher.Core.Domain;
 using Fisher.Core.Utilities;
 
-class TxtFileConverter : INoteFileConverterStrategy
+public class TxtFileConverter : INoteFileConverterStrategy
 {
     public FileType Type { get; } = FileType.Txt;
 
@@ -25,7 +25,7 @@ class TxtFileConverter : INoteFileConverterStrategy
                 results.Add(new Note(elements[0],elements[1]));
             }
         }
-
+        stream.Dispose();
         return results;
     }
 }

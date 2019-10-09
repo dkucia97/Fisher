@@ -19,6 +19,17 @@ namespace Fisher.Core.Services
             _uow = uow;
         }
 
+        public async Task<NotePackage> GetById(string userName, int id)
+        {
+            var package = await _uow.NotePackageRepository.GetById(id);
+            if (!package.IsPublic && package.Owner.UserName.Equals(userName))
+            {
+                throw new ArgumentException("You don't have access to this package (it's private)");
+            }
+
+            return package;
+        }
+
         public Task<IEnumerable<NotePackage>> GetByCategory(int categoryId, PaginationRequest page)
         {
             return _uow.NotePackageRepository.GetByCategory(categoryId, page);
