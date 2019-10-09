@@ -1,10 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fisher.Core", "Fisher.Core\Fisher.Core.csproj", "{1FEA4EA9-AFF8-436B-B5D5-18EE9081AA74}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fisher.Core", "src\Fisher.Core\Fisher.Core.csproj", "{1FEA4EA9-AFF8-436B-B5D5-18EE9081AA74}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fisher.Infrastructure", "Fisher.Infrastructure\Fisher.Infrastructure.csproj", "{5BDFBF4D-9CBF-4325-81B2-79F3C334D26A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fisher.Infrastructure", "src\Fisher.Infrastructure\Fisher.Infrastructure.csproj", "{5BDFBF4D-9CBF-4325-81B2-79F3C334D26A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fisher.Api", "Fisher.Api\Fisher.Api.csproj", "{A3D41C5A-0779-4836-B55F-69437B3F12ED}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fisher.Api", "src\Fisher.Api\Fisher.Api.csproj", "{A3D41C5A-0779-4836-B55F-69437B3F12ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{4EE74FA1-1BBF-486A-99A1-16A4EDDBC12F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,5 +26,9 @@ Global
 		{A3D41C5A-0779-4836-B55F-69437B3F12ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3D41C5A-0779-4836-B55F-69437B3F12ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3D41C5A-0779-4836-B55F-69437B3F12ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EE74FA1-1BBF-486A-99A1-16A4EDDBC12F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EE74FA1-1BBF-486A-99A1-16A4EDDBC12F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EE74FA1-1BBF-486A-99A1-16A4EDDBC12F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EE74FA1-1BBF-486A-99A1-16A4EDDBC12F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
